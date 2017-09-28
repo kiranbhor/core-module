@@ -1,5 +1,5 @@
 {
-  "name": "idavoll/core-module",
+  "name": "accunity/core-module",
   "type": "asgard-module",
   "description": "The core module for AsgardCMS. This is required for every install.",
   "keywords": [
@@ -49,7 +49,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "3.0.x-dev"
+      "dev-master": "1.0.x-dev"
     }
   },
   "minimum-stability": "dev",
