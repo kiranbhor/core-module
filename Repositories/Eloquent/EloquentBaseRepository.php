@@ -191,4 +191,186 @@ abstract class EloquentBaseRepository implements BaseRepository
     {
         return true;
     }
+
+    /**
+     * This method will return only sepecified columns from table satisfying the conditions
+     * @param array $attributes
+     * @param array $columns
+     * @param null $orderBy
+     * @param string $sortOrder
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getByAttributesWithColumns(array $attributes,array $columns=null, $orderBy = null, $sortOrder = 'asc')
+    {
+        $query = $this->buildQueryByAttributes($attributes, $orderBy, $sortOrder);
+
+        return $query->get($columns);
+    }
+
+   
+
+    /**
+     * Get data as Name and Id for select
+     * @param string $nameColumn
+     * @param string $idColumn
+     * @return mixed
+     */
+    public function getNameValue($nameColumn = 'name',$idColumn = 'id'){
+        return $this->getQuery()->pluck($nameColumn, $idColumn);
+    }
+
+    
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function allWith(array $with,$order = 'desc') {
+
+        if ($with != null) {
+            return $this->model->with($with)->orderBy('created_at', $order)->get();
+        }
+
+        return $this->model->orderBy('created_at', $order)->get();
+    }
+
+    /**
+     * @param $columns
+     * @return mixed
+     */
+    public function allWithColumns(array $columns,$orderBy = null, $sortOrder = 'asc')
+    {
+        return $this->model->orderBy($orderBy, $sortOrder)->get($columns);
+    }
+
+    /**
+     * @param array $modelIds
+     * @return int
+     */
+    public function deleteAll(array $modelIds){
+        return $this->model->destroy($modelIds);
+    }
+
+
+    /** Inserts multiple records to table
+     * @param array $record
+     * @return mixed
+     */
+    public function insert(array $record){
+        return $this->model->insert($record);
+    }
+
+
+    /**
+     * Returns the query instance of the model   *
+     * @return object
+     */
+    public function getQuery() {
+        return $this->model->query();
+    }
+    /**
+     * Get the model associated with repo
+     */
+    public function getModel(){
+        return $this->model;
+    }
+    
+
+
+    /**
+     * Finds model and return with given association
+     * @param $id
+     * @param $with
+     * @return \Illuminate\Database\Eloquent\Collection|Model|null|static|static[]
+     */
+    public function findWith($id,$with)
+    {
+        return $this->model->with($with)->find($id);
+    }
+
+    /**
+     * @param array $attributes
+     * @param $with
+     * @param string $orderBy
+     * @param string $direction
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function findManyByWith(array $attributes, $with, $orderBy = 'created_at',$direction = 'desc') {
+        $query = $this->model->query()->with($with);
+
+        foreach ($attributes as $field => $value) {
+            $query = $query->where($field, $value);
+        }
+
+        $query->orderBy($orderBy, $direction);
+
+
+        return $query->get();
+    }
+
+    /**
+     * @param array $attributes
+     * @param null $orderBy
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function findManyByAttributes(array $attributes, $orderBy = null) {
+        $query = $this->model->query();
+
+        foreach ($attributes as $field => $value) {
+            $query = $query->where($field, $value);
+        }
+
+        if ($orderBy != null) {
+            $query->orderBy($orderBy, 'desc');
+        }
+
+        return $query->get();
+    }
+
+    /**
+     * @param array $attributes
+     * @param array $columns
+     * @param null $orderBy
+     * @param string $sortOrder
+     * @return mixed
+     */
+    public function findByAttributesWithColumns(array $attributes,array $columns, $orderBy = null, $sortOrder = 'asc'){
+        $query = $this->model->query();
+
+        foreach ($attributes as $field => $value) {
+            $query = $query->where($field, $value);
+        }
+
+        if ($orderBy != null) {
+            $query->orderBy($orderBy, 'desc');
+        }
+
+        return $query->first();
+    }
+
+    /**
+     * @param array $attributes
+     * @param array $columns
+     * @param null $orderBy
+     * @param string $sortOrder
+     * @return Model|null|static
+     */
+    public function findByAttributesWith(array $attributes,array $with, $orderBy = null, $sortOrder = 'asc'){
+        $query = $this->model->query()->with($with);
+
+        foreach ($attributes as $field => $value) {
+            $query = $query->where($field, $value);
+        }
+
+        if ($orderBy != null) {
+            $query->orderBy($orderBy, 'desc');
+        }
+
+        return $query->first();
+    }
+
+
+
+    
+        
+
 }
