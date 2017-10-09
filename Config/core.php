@@ -92,12 +92,16 @@ return [
         'asgard.css' => ['theme' => 'css/asgard.css'],
         //'gridstack.css' => ['module' => 'dashboard:vendor/gridstack/dist/gridstack.min.css'],
         'gridstack.css' => ['module' => 'dashboard:gridstack/gridstack.min.css'],
-        'daterangepicker.css' => ['theme' => 'vendor/admin-lte/plugins/daterangepicker/daterangepicker-bs3.css'],
+        'daterangepicker.css' => ['theme' => 'vendor/admin-lte/plugins/daterangepicker/daterangepicker.css'],
         'selectize.css' => ['module' => 'core:vendor/selectize/dist/css/selectize.css'],
         'selectize-default.css' => ['module' => 'core:vendor/selectize/dist/css/selectize.default.css'],
         'animate.css' => ['theme' => 'vendor/animate.css/animate.min.css'],
         'pace.css' => ['theme' => 'vendor/admin-lte/plugins/pace/pace.min.css'],
         'simplemde.css' => ['theme' => 'vendor/simplemde/dist/simplemde.min.css'],
+        'select2.css' => ['theme' => 'vendor/admin-lte/plugins/select2/select2.min.css'],
+        'datetime-picker.css' => ['theme' => 'vendor/jquery-datetimepicker/jquery.datetimepicker.min.css'],
+        'toastr.css' => ['theme' => 'vendor/toastr/toastr.min.css'],
+
         // Javascript
         'bootstrap.js' => ['theme' => 'vendor/bootstrap/dist/js/bootstrap.min.js'],
         'mousetrap.js' => ['theme' => 'js/vendor/mousetrap.min.js'],
@@ -125,6 +129,10 @@ return [
         'moment.js' => ['theme' => 'vendor/admin-lte/plugins/daterangepicker/moment.min.js'],
         'clipboard.js' => ['theme' => 'vendor/clipboard/dist/clipboard.min.js'],
         'simplemde.js' => ['theme' => 'vendor/simplemde/dist/simplemde.min.js'],
+        'select2.js' => ['theme' => 'vendor/admin-lte/plugins/select2/select2.min.js'],
+        'datetime-picker.js' => ['theme' => 'vendor/jquery-datetimepicker/jquery.datetimepicker.full.min.js'],
+        'toastr.js' => ['theme' => 'vendor/toastr/toastr.min.js'],
+        'knockout.js' =>['theme' => 'vendor/knockout/knockout-latest.js'],
     ],
 
     /*
@@ -141,12 +149,16 @@ return [
             'alertify.default.css',
             'dataTables.bootstrap.css',
             'icheck.blue.css',
+            'select2.css',
             'AdminLTE.css',
             'AdminLTE.all.skins.css',
             'animate.css',
             'pace.css',
             'selectize-default.css',
             'asgard.css',
+            'datetime-picker.css',
+            'daterangepicker.css',
+            'toastr.css'
         ],
         'js' => [
             'bootstrap.js',
@@ -157,10 +169,16 @@ return [
             'dataTables.bootstrap.js',
             'jquery.slug.js',
             'keypressAction.js',
+            'moment.js',
             'app.js',
             'pace.js',
             'selectize.js',
             'main.js',
+            'select2.js',
+            'datetime-picker.js',
+            'daterangepicker.js',
+            'toastr.js',
+            'knockout.js'
         ],
     ],
 

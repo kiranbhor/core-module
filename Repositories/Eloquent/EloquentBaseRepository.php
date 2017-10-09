@@ -53,7 +53,7 @@ abstract class EloquentBaseRepository implements BaseRepository
     /**
      * @inheritdoc
      */
-    public function allWithBuilder() : Builder
+    public function allWithBuilder()
     {
         if (method_exists($this->model, 'translations')) {
             return $this->model->with('translations');
@@ -224,13 +224,15 @@ abstract class EloquentBaseRepository implements BaseRepository
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function allWith(array $with,$order = 'desc') {
-
+    public function allWith(array $with,$order = 'desc', $sortOrder = 'created_at' ) {
+	
         if ($with != null) {
-            return $this->model->with($with)->orderBy('created_at', $order)->get();
+            return $this->model->with($with)->orderBy($sortOrder, $order)->get();
         }
+	
+	
 
-        return $this->model->orderBy('created_at', $order)->get();
+        return $this->model->orderBy($sortOrder, $order)->get();
     }
 
     /**
@@ -368,9 +370,49 @@ abstract class EloquentBaseRepository implements BaseRepository
         return $query->first();
     }
 
+    public function getAllWith(array $with, array $attributes) {
+
+        $query = $this->model->with($with)->get();
+
+        foreach($query as $subQuery) {
+
+                if ($subQuery->from_Date > $attributes[0] && $subQuery->to_Date < $attributes[1] ) {
+                    var_dump($subQuery);
+                    return'hgfh';
+                }
+            return'ghg';
+        }
 
 
-    
-        
 
+        return $query->get();
+
+    }
+
+    /**
+     * @param array $attributes
+     * @param array $columns
+     * @param null $orderBy
+     * @param string $sortOrder
+     * @return Model|null|static
+     */
+    public function getByAttributesWith(array $attributes,array $with, $orderBy = null, $sortOrder = 'asc'){
+
+        $query = $this->model->query()->with($with);
+
+        foreach ($attributes as $field => $value) {
+            $query = $query->where($field, $value);
+        }
+
+        if ($orderBy != null) {
+            $query->orderBy($orderBy, 'desc');
+        }
+
+        return $query->get();
+    }
+
+    public function deleteById($id)
+    {
+        return $this->model->destroy([$id]);
+    }
 }
