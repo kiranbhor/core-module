@@ -13,6 +13,11 @@ class ModuleSeeders implements SetupScript
     protected $modules = [
         'Setting',
         'Page',
+        'User',
+        'Reports',
+        'Filemanager',
+        'Workflow'
+        'Profile',
     ];
 
     /**

@@ -14,6 +14,11 @@ class ModuleAssets implements SetupScript
         'Core',
         'Media',
         'Menu',
+        'Workflow',
+        'Reports',
+        'Profile',
+        'Filemanager',
+        'Dashboard',
     ];
 
     /**

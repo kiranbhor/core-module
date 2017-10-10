@@ -18,6 +18,12 @@ class ModuleMigrator implements SetupScript
         'Dashboard',
         'Translation',
         'Tag',
+        'User',
+        'Profile',
+        'Filemanager',
+        'Reports',
+        'Workflow'
+        'Reports',
     ];
 
     /**
